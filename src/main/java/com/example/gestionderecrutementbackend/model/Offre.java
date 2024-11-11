@@ -61,4 +61,68 @@ public class Offre {
     public void setDemandes(List<Demande> demandes) {
         this.demandes = demandes;
     }
+
+    public String getNiveau_etude() {
+        return niveau_etude;
+    }
+
+    public void setNiveau_etude(String niveau_etude) {
+        this.niveau_etude = niveau_etude;
+    }
+
+    public String getExperince() {
+        return experince;
+    }
+
+    public void setExperince(String experince) {
+        this.experince = experince;
+    }
+
+    public String getLangue() {
+        return langue;
+    }
+
+    public void setLangue(String langue) {
+        this.langue = langue;
+    }
+
+    public int getNb_a_recruté() {
+        return nb_a_recruté;
+    }
+
+    public void setNb_a_recruté(int nb_a_recruté) {
+        this.nb_a_recruté = nb_a_recruté;
+    }
+
+    public String getVille() {
+        return ville;
+    }
+
+    public void setVille(String ville) {
+        this.ville = ville;
+    }
+
+    public Date getDate_experation() {
+        return Date_experation;
+    }
+
+    public void setDate_experation(Date date_experation) {
+        Date_experation = date_experation;
+    }
+
+    public Long getSalaire() {
+        return Salaire;
+    }
+
+    public void setSalaire(Long salaire) {
+        Salaire = salaire;
+    }
+
+    public Recruteur getRecruteur() {
+        return recruteur;
+    }
+
+    public void setRecruteur(Recruteur recruteur) {
+        this.recruteur = recruteur;
+    }
 }

@@ -30,33 +30,41 @@ public class LoginController {
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
-        // Récupérer l'utilisateur par email
+        // Retrieve user by email
         Optional<Utilisateur> utilisateurOptional = userService.getUserByEmail(loginRequest.getEmail());
-
-        // Vérifier si l'utilisateur existe
         if (utilisateurOptional.isEmpty()) {
-            return ResponseEntity.status(404).body(new LoginResponse("Utilisateur non trouvé", null));
+            System.out.println("User not found with email: " + loginRequest.getEmail());
+            return ResponseEntity.status(404).body(new LoginResponse("Utilisateur non trouvé", null, null));
         }
 
-        Utilisateur utilisateur = utilisateurOptional.get(); // Extraire l'utilisateur
+        Utilisateur utilisateur = utilisateurOptional.get();
+        System.out.println("User found: " + utilisateur.getEmail());
 
-        // Vérifier le mot de passe
+        // Verify password
         if (!passwordEncoder.matches(loginRequest.getMotDePasse(), utilisateur.getMotDePasse())) {
-            return ResponseEntity.status(401).body(new LoginResponse("Identifiants incorrects", null));
+            System.out.println("Password mismatch for user: " + utilisateur.getEmail());
+            return ResponseEntity.status(401).body(new LoginResponse("Identifiants incorrects", null, null));
         }
 
-        // Générer le token JWT
+        // Generate JWT token
         String token = jwtUtil.generateToken(utilisateur.getEmail());
+        System.out.println("Generated JWT token for user: " + utilisateur.getEmail());
 
-        // Identifier le type d'utilisateur et retourner un message différent selon le type
+        // Determine user role
+        String userRole;
         if (utilisateur instanceof Admin) {
-            return ResponseEntity.ok(new LoginResponse("Connexion réussie - Admin", token));
+            userRole = "Admin";
         } else if (utilisateur instanceof Recruteur) {
-            return ResponseEntity.ok(new LoginResponse("Connexion réussie - Recruteur", token));
+            userRole = "Recruteur";
         } else if (utilisateur instanceof Candidat) {
-            return ResponseEntity.ok(new LoginResponse("Connexion réussie - Candidat", token));
+            userRole = "Candidat";
         } else {
-            return ResponseEntity.status(400).body(new LoginResponse("Type d'utilisateur inconnu", null));
+            System.out.println("Unknown user type for user: " + utilisateur.getEmail());
+            return ResponseEntity.status(400).body(new LoginResponse("Type d'utilisateur inconnu", null, null));
         }
+
+        System.out.println("User role: " + userRole);
+        return ResponseEntity.ok(new LoginResponse("Connexion réussie - " + userRole, token, userRole));
     }
+
 }

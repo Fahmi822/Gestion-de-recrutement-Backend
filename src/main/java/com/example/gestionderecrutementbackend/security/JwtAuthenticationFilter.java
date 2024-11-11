@@ -1,7 +1,5 @@
 package com.example.gestionderecrutementbackend.security;
 
-
-
 import com.example.gestionderecrutementbackend.utils.JwtUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

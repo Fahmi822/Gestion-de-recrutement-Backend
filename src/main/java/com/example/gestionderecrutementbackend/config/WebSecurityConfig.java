@@ -26,7 +26,8 @@ public class WebSecurityConfig {
                 .cors()  // Enable CORS
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/auth/signup", "/api/auth/login").permitAll()  // Update URL to match your API endpoint
+                .requestMatchers("/api/auth/signup", "/api/auth/login").permitAll()// Update URL to match your API endpoint
+                .requestMatchers("/api/offres/ajouter").permitAll()
                 .anyRequest().authenticated()  // Require authentication for other requests
                 .and()
                 .sessionManagement()
