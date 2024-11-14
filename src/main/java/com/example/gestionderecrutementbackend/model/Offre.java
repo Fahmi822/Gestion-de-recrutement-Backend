@@ -1,5 +1,6 @@
 package com.example.gestionderecrutementbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -14,10 +15,11 @@ public class Offre {
     private String niveau_etude;
     private String experince;
     private String langue;
-    private int nb_a_recruté;
+    private int nb_a_recrut;
     private String ville;
-    private Date Date_experation;
-    private  Long Salaire;
+    @JsonFormat(pattern="yyyy-MM-dd")
+    private Date Dateexperation;
+    private  Double Salaire;
 
     @ManyToOne
     @JoinColumn(name = "admin_id")
@@ -86,12 +88,12 @@ public class Offre {
         this.langue = langue;
     }
 
-    public int getNb_a_recruté() {
-        return nb_a_recruté;
+    public int getNb_a_recrut() {
+        return nb_a_recrut;
     }
 
-    public void setNb_a_recruté(int nb_a_recruté) {
-        this.nb_a_recruté = nb_a_recruté;
+    public void setNb_a_recrut(int nb_a_recrut) {
+        this.nb_a_recrut = nb_a_recrut;
     }
 
     public String getVille() {
@@ -102,19 +104,19 @@ public class Offre {
         this.ville = ville;
     }
 
-    public Date getDate_experation() {
-        return Date_experation;
+    public Date getDateexperation() {
+        return Dateexperation;
     }
 
-    public void setDate_experation(Date date_experation) {
-        Date_experation = date_experation;
+    public void setDateexperation(Date Dateexperation) {
+        Dateexperation = Dateexperation;
     }
 
-    public Long getSalaire() {
+    public Double getSalaire() {
         return Salaire;
     }
 
-    public void setSalaire(Long salaire) {
+    public void setSalaire(Double salaire) {
         Salaire = salaire;
     }
 

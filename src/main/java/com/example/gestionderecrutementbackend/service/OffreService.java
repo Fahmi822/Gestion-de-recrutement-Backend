@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class OffreService {
@@ -27,9 +26,9 @@ public class OffreService {
             o.setNiveau_etude(offre.getNiveau_etude());
             o.setExperince(offre.getExperince());
             o.setLangue(offre.getLangue());
-            o.setNb_a_recruté(offre.getNb_a_recruté());
+            o.setNb_a_recrut(offre.getNb_a_recrut());
             o.setVille(offre.getVille());
-            o.setDate_experation(offre.getDate_experation());
+            o.setDateexperation(offre.getDateexperation());
             o.setSalaire(offre.getSalaire());
             return offreRepository.save(o);
         }).orElseThrow(() -> new RuntimeException("Offre non trouvée"));
