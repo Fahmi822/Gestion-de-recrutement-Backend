@@ -37,4 +37,9 @@ public class OffreController {
         offreService.supprimerOffre(id);
         return ResponseEntity.noContent().build();
     }
+    @GetMapping("/count")
+    public ResponseEntity<Long> getTotalOffreCount() {
+        long totalCount = offreService.getTotalOffre();
+        return ResponseEntity.ok(totalCount);
+    }
 }

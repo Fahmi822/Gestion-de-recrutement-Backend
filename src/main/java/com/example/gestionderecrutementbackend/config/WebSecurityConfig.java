@@ -27,8 +27,8 @@ public class WebSecurityConfig {
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers("/api/auth/signup", "/api/auth/login").permitAll()
-                .requestMatchers("/api/offres/ajouter","/api/offres/toutes","/api/offres/supprimer/{id}","/api/offres/modifier/{id}").permitAll()
-                .requestMatchers("/api/candidats").permitAll()
+                .requestMatchers("/api/offres/ajouter","/api/offres/toutes","/api/offres/supprimer/{id}","/api/offres/modifier/{id}","/api/offres/count").permitAll()
+                .requestMatchers("/api/candidats","/api/count", "/api/count/men","/api/count/women").permitAll()
                 .anyRequest().authenticated()  // Require authentication for other requests
                 .and()
                 .sessionManagement()

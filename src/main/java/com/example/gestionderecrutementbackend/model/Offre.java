@@ -13,7 +13,7 @@ public class Offre {
     private Long id;
     private String post;
     private String niveau_etude;
-    private String experince;
+    private String experience;
     private String langue;
     private int nb_a_recrut;
     private String ville;
@@ -73,11 +73,11 @@ public class Offre {
     }
 
     public String getExperince() {
-        return experince;
+        return experience;
     }
 
-    public void setExperince(String experince) {
-        this.experince = experince;
+    public void setExperince(String experience) {
+        this.experience = experience;
     }
 
     public String getLangue() {

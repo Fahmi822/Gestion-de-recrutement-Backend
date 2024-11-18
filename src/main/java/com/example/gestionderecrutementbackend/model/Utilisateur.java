@@ -16,6 +16,7 @@ public abstract class Utilisateur {
     private String tel;
     private String photo;
     private String motDePasse;
+    private String genre;
 
     // Getters and Setters
 
@@ -81,5 +82,13 @@ public abstract class Utilisateur {
 
     public void setMotDePasse(String motDePasse) {
         this.motDePasse = motDePasse;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 }

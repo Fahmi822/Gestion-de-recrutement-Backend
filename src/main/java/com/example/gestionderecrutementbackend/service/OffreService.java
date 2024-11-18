@@ -37,4 +37,7 @@ public class OffreService {
     public void supprimerOffre(Long id) {
         offreRepository.deleteById(id);
     }
+    public long getTotalOffre() {
+        return offreRepository.count();
+    }
 }

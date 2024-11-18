@@ -13,12 +13,12 @@ public class SignupRequest {
     private String cv;
     private String lettreMotivation;
     private String diplome;
-
+    private String genre;
     public SignupRequest() {
     }
 
     public SignupRequest(String nom, String prenom, int age, String email, String tel, String photo, String motDePasse,
-                         String adresse, String cv, String lettreMotivation, String diplome) {
+                         String adresse, String cv, String lettreMotivation, String diplome,String genre) {
         this.nom = nom;
         this.prenom = prenom;
         this.age = age;
@@ -30,7 +30,9 @@ public class SignupRequest {
         this.cv = cv;
         this.lettreMotivation = lettreMotivation;
         this.diplome = diplome;
+        this.genre=genre;
     }
+
 
     // Getters and Setters
     public String getNom() {
@@ -119,5 +121,13 @@ public class SignupRequest {
 
     public void setDiplome(String diplome) {
         this.diplome = diplome;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 }
