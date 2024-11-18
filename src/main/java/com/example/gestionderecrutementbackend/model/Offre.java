@@ -1,6 +1,7 @@
 package com.example.gestionderecrutementbackend.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -24,7 +25,7 @@ public class Offre {
     @ManyToOne
     @JoinColumn(name = "admin_id")
     private Admin admin;
-
+    @JsonIgnore
     @ManyToMany(mappedBy = "offres")
     private List<Demande> demandes;
     @ManyToOne
