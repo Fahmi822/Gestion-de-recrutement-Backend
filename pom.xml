@@ -79,18 +79,35 @@
             <version>0.11.5</version>
         </dependency>
         <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt-jackson</artifactId>
-            <version>0.11.5</version>
-        </dependency>
-        <dependency>
             <groupId>com.vaadin.external.google</groupId>
             <artifactId>android-json</artifactId>
             <version>0.0.20131108.vaadin1</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-api</artifactId>
+            <version>0.11.5</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-impl</artifactId>
+            <version>0.11.5</version>
+        </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt-jackson</artifactId> <!-- For JSON parsing -->
+            <version>0.11.5</version>
+        </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -99,5 +116,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

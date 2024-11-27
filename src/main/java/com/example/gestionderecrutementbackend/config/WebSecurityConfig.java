@@ -26,10 +26,9 @@ public class WebSecurityConfig {
                 .cors()  // Enable CORS
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/auth/signup", "/api/auth/login").permitAll()
+                .requestMatchers("/api/auth/signup", "/api/auth/login","/api/demandes/postuler").permitAll()
                 .requestMatchers("/api/offres/ajouter","/api/offres/toutes","/api/offres/supprimer/{id}","/api/offres/modifier/{id}","/api/offres/count").permitAll()
-                .requestMatchers("/api/candidats","/api/count", "/api/count/men","/api/count/women").permitAll()
-                .requestMatchers("/api/demandes/postuler").permitAll()
+                .requestMatchers("/api/candidats","/api/candidats/{id}","/api/count", "/api/count/men","/api/count/women","/api/{id}/update-profile","/api/mail/send").permitAll()
                 .anyRequest().authenticated()  // Require authentication for other requests
                 .and()
                 .sessionManagement()

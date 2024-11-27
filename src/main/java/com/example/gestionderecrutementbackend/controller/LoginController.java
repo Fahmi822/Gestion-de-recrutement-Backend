@@ -14,7 +14,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
-
 @RestController
 @RequestMapping("/api/auth")
 public class LoginController {
@@ -34,7 +33,7 @@ public class LoginController {
         Optional<Utilisateur> utilisateurOptional = userService.getUserByEmail(loginRequest.getEmail());
         if (utilisateurOptional.isEmpty()) {
             System.out.println("User not found with email: " + loginRequest.getEmail());
-            return ResponseEntity.status(404).body(new LoginResponse("Utilisateur non trouvé", null, null));
+            return ResponseEntity.status(404).body(new LoginResponse("Utilisateur non trouvé", null, null, null));
         }
 
         Utilisateur utilisateur = utilisateurOptional.get();
@@ -43,15 +42,16 @@ public class LoginController {
         // Verify password
         if (!passwordEncoder.matches(loginRequest.getMotDePasse(), utilisateur.getMotDePasse())) {
             System.out.println("Password mismatch for user: " + utilisateur.getEmail());
-            return ResponseEntity.status(401).body(new LoginResponse("Identifiants incorrects", null, null));
+            return ResponseEntity.status(401).body(new LoginResponse("Identifiants incorrects", null, null, null));
         }
 
         // Generate JWT token
         String token = jwtUtil.generateToken(utilisateur.getEmail());
         System.out.println("Generated JWT token for user: " + utilisateur.getEmail());
 
-        // Determine user role
+        // Determine user role and ID
         String userRole;
+        Long utilisateurId = utilisateur.getId(); // Récupérer l'ID de l'utilisateur
         if (utilisateur instanceof Admin) {
             userRole = "Admin";
         } else if (utilisateur instanceof Recruteur) {
@@ -60,11 +60,11 @@ public class LoginController {
             userRole = "Candidat";
         } else {
             System.out.println("Unknown user type for user: " + utilisateur.getEmail());
-            return ResponseEntity.status(400).body(new LoginResponse("Type d'utilisateur inconnu", null, null));
+            return ResponseEntity.status(400).body(new LoginResponse("Type d'utilisateur inconnu", null, null, null));
         }
 
         System.out.println("User role: " + userRole);
-        return ResponseEntity.ok(new LoginResponse("Connexion réussie - " + userRole, token, userRole));
+        return ResponseEntity.ok(new LoginResponse("Connexion réussie - " + userRole, token, userRole, utilisateurId));
     }
 
 }

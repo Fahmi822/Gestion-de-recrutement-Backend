@@ -1,12 +1,13 @@
 package com.example.gestionderecrutementbackend.controller;
 
+import com.example.gestionderecrutementbackend.Exception.CandidatNotFoundException;
 import com.example.gestionderecrutementbackend.model.Candidat;
 import com.example.gestionderecrutementbackend.service.CandidatService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -40,4 +41,22 @@ public class CandidatController {
         long numberOfWomen = candidatService.getNumberOfWomen();
         return ResponseEntity.ok(numberOfWomen);
     }
+
+    @PutMapping("/{id}/update-profile")
+    public ResponseEntity<Candidat> updateProfile(@PathVariable Long id, @Valid @RequestBody Candidat updatedCandidat) {
+        Candidat candidat = candidatService.updateCandidatProfile(id, updatedCandidat);
+        return ResponseEntity.ok(candidat);
+    }
+    @GetMapping("/candidats/{id}")
+    public ResponseEntity<Candidat> getCandidatById(@PathVariable Long id) {
+        try {
+            Candidat candidat = candidatService.getCandidatById(id);
+            return ResponseEntity.ok(candidat);
+        } catch (CandidatNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+
+
 }
+

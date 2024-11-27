@@ -30,6 +30,7 @@ public class OffreService {
             o.setVille(offre.getVille());
             o.setDateexperation(offre.getDateexperation());
             o.setSalaire(offre.getSalaire());
+            o.setDescription(offre.getDescription());
             return offreRepository.save(o);
         }).orElseThrow(() -> new RuntimeException("Offre non trouvée"));
     }

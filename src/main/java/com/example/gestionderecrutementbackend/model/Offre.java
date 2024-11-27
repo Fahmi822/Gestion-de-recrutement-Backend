@@ -21,6 +21,7 @@ public class Offre {
     @JsonFormat(pattern="yyyy-MM-dd")
     private Date Dateexperation;
     private  Double Salaire;
+    private String Description;
 
     @ManyToOne
     @JoinColumn(name = "admin_id")
@@ -127,5 +128,21 @@ public class Offre {
 
     public void setRecruteur(Recruteur recruteur) {
         this.recruteur = recruteur;
+    }
+
+    public String getExperience() {
+        return experience;
+    }
+
+    public void setExperience(String experience) {
+        this.experience = experience;
+    }
+
+    public String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String description) {
+        Description = description;
     }
 }
