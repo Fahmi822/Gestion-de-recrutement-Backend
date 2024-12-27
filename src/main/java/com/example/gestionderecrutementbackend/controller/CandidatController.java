@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api") // Sets the base path for the controller
+@RequestMapping("/api")
 public class CandidatController {
 
     @Autowired
@@ -20,7 +20,7 @@ public class CandidatController {
 
     @GetMapping("/candidats")
     public List<Candidat> getAllCandidates() {
-        return candidatService.getAllCandidates(); // Retrieves all candidates
+        return candidatService.getAllCandidates();
     }
     @GetMapping("/count")
     public ResponseEntity<Long> getTotalCandidatesCount() {
@@ -56,7 +56,4 @@ public class CandidatController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
-
-
 }
-

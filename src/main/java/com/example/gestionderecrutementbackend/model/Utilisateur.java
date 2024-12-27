@@ -1,6 +1,8 @@
 package com.example.gestionderecrutementbackend.model;
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Utilisateur {
@@ -14,11 +16,33 @@ public abstract class Utilisateur {
     private int age;
     private String email;
     private String tel;
+    @Lob
     private String photo;
     private String motDePasse;
     private String genre;
+    @Column(name = "reset_token")
+    private String resetToken;
+    @Column(nullable = true)
+    private LocalDateTime resetTokenExpiration;
+
+    public LocalDateTime getResetTokenExpiration() {
+        return resetTokenExpiration;
+    }
+
+    public void setResetTokenExpiration(LocalDateTime resetTokenExpiration) {
+        this.resetTokenExpiration = resetTokenExpiration;
+    }
 
     // Getters and Setters
+
+    public String getResetToken() {
+        return resetToken;
+    }
+
+    public void setResetToken(String resetToken) {
+        this.resetToken = resetToken;
+    }
+
 
     public Long getId() {
         return id;
@@ -91,4 +115,5 @@ public abstract class Utilisateur {
     public void setGenre(String genre) {
         this.genre = genre;
     }
+
 }

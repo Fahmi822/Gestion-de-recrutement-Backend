@@ -1,5 +1,6 @@
 package com.example.gestionderecrutementbackend.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 
 @Entity
@@ -9,6 +10,9 @@ public class Candidat extends Utilisateur {
     private String cv;
     private String lettreMotivation;
     private String diplome;
+
+
+
 
     // Getters and Setters
     public String getAdresse() {

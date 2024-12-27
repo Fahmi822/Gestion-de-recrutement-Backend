@@ -1,10 +1,12 @@
 package com.example.gestionderecrutementbackend.service;
+import com.example.gestionderecrutementbackend.dto.OffreDTO;
 import com.example.gestionderecrutementbackend.model.Offre;
 import com.example.gestionderecrutementbackend.repository.OffreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OffreService {
@@ -15,9 +17,26 @@ public class OffreService {
     public Offre ajouterOffre(Offre offre) {
         return offreRepository.save(offre);
     }
+    public OffreDTO convertToDTO(Offre offre) {
+        return new OffreDTO(
+                offre.getId(),
+                offre.getPost(),
+                offre.getNiveau_etude(),
+                offre.getExperience(),
+                offre.getLangue(),
+                offre.getNb_a_recrut(),
+                offre.getVille(),
+                offre.getDateexperation(),
+                offre.getSalaire(),
+                offre.getDescription()
+        );
+    }
 
-    public List<Offre> obtenirToutesLesOffres() {
-        return offreRepository.findAll();
+    public List<OffreDTO> obtenirToutesLesOffres() {
+        List<Offre> offres = offreRepository.findAll();
+        return offres.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
     }
 
     public Offre modifierOffre(Long id, Offre offre) {
@@ -41,4 +60,5 @@ public class OffreService {
     public long getTotalOffre() {
         return offreRepository.count();
     }
+
 }

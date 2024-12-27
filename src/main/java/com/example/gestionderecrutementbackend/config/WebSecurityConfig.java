@@ -13,7 +13,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import com.example.gestionderecrutementbackend.security.JwtAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -26,9 +25,11 @@ public class WebSecurityConfig {
                 .cors()  // Enable CORS
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/auth/signup", "/api/auth/login","/api/demandes/postuler").permitAll()
-                .requestMatchers("/api/offres/ajouter","/api/offres/toutes","/api/offres/supprimer/{id}","/api/offres/modifier/{id}","/api/offres/count").permitAll()
+                .requestMatchers("/api/auth/signup", "/api/auth/login","/api/auth/forgot-password","/api/auth/reset-password","/api/demandes/postuler","/api/demandes/accepted-entretien").permitAll()
+                .requestMatchers("/api/offres/ajouter","/api/offres/toutes","/api/offres/supprimer/{id}","/api/offres/modifier/{id}","/api/offres/count","/api/demandes/{demandeId}/accepter","/api/demandes/{demandeId}/refuser").permitAll()
                 .requestMatchers("/api/candidats","/api/candidats/{id}","/api/count", "/api/count/men","/api/count/women","/api/{id}/update-profile","/api/mail/send").permitAll()
+                .requestMatchers("/api/demandes/{offreId}/demandes","/api/demandes/fichiers/{fileName}").permitAll()
+                .requestMatchers("/api/demandes/fichiers/**").permitAll()
                 .anyRequest().authenticated()  // Require authentication for other requests
                 .and()
                 .sessionManagement()
@@ -62,3 +63,4 @@ public class WebSecurityConfig {
         return config.getAuthenticationManager();
     }
 }
+

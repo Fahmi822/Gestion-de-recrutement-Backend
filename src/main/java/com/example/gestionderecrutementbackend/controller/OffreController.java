@@ -1,5 +1,6 @@
 package com.example.gestionderecrutementbackend.controller;
 
+import com.example.gestionderecrutementbackend.dto.OffreDTO;
 import com.example.gestionderecrutementbackend.model.Offre;
 import com.example.gestionderecrutementbackend.service.OffreService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +22,11 @@ public class OffreController {
     }
 
     @GetMapping("/toutes")
-    public ResponseEntity<List<Offre>> obtenirToutesLesOffres() {
-        List<Offre> offres = offreService.obtenirToutesLesOffres();
-        return ResponseEntity.ok(offres);
+    public ResponseEntity<List<OffreDTO>> obtenirToutesLesOffres() {
+        List<OffreDTO> offresDTO = offreService.obtenirToutesLesOffres();
+        return ResponseEntity.ok(offresDTO);
     }
+
 
     @PutMapping("/modifier/{id}")
     public ResponseEntity<Offre> modifierOffre(@PathVariable Long id, @RequestBody Offre offre) {

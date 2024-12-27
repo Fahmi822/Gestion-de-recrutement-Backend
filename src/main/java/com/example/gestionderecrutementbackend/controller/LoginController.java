@@ -6,6 +6,8 @@ import com.example.gestionderecrutementbackend.model.Utilisateur;
 import com.example.gestionderecrutementbackend.model.Admin;
 import com.example.gestionderecrutementbackend.model.Recruteur;
 import com.example.gestionderecrutementbackend.model.Candidat;
+import com.example.gestionderecrutementbackend.service.AuthService;
+import com.example.gestionderecrutementbackend.service.EmailService;
 import com.example.gestionderecrutementbackend.service.UserService;
 import com.example.gestionderecrutementbackend.utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 @RestController
 @RequestMapping("/api/auth")
@@ -23,6 +26,10 @@ public class LoginController {
 
     @Autowired
     private JwtUtil jwtUtil;
+    @Autowired
+    private EmailService emailService;
+    @Autowired
+    private AuthService authService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -66,5 +73,8 @@ public class LoginController {
         System.out.println("User role: " + userRole);
         return ResponseEntity.ok(new LoginResponse("Connexion réussie - " + userRole, token, userRole, utilisateurId));
     }
+
+
+
 
 }

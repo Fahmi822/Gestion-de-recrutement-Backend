@@ -9,7 +9,7 @@ public class Demande {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String status;
+    private String status = "En Attente";
     private Date date;
 
     @ManyToOne
@@ -23,13 +23,21 @@ public class Demande {
             inverseJoinColumns = @JoinColumn(name = "offre_id")
     )
     private List<Offre> offres;
+    @Column(nullable = false)
     private String email;
     private String cv;
     private String lettreMotivation;
     private String diplome;
+    private String cvUrl;
+    private String diplomeUrl;
+    private String lettreMotivationUrl;
 
-    @ManyToOne
-    @JoinColumn(name = "recruteur_id")
+    public Demande() {
+        this.status = "En Attente";  // Ensure default value
+    }
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "recruteur_id",referencedColumnName = "id")
     private Recruteur recruteur;
 
     @OneToOne(mappedBy = "demande", cascade = CascadeType.ALL)
@@ -108,11 +116,39 @@ public class Demande {
         this.lettreMotivation = lettreMotivation;
     }
 
+    public Entretien getEntretien() {
+        return entretien;
+    }
+
     public String getDiplome() {
         return diplome;
     }
 
     public void setDiplome(String diplome) {
         this.diplome = diplome;
+    }
+
+    public String getCvUrl() {
+        return cvUrl;
+    }
+
+    public void setCvUrl(String cvUrl) {
+        this.cvUrl = cvUrl;
+    }
+
+    public String getDiplomeUrl() {
+        return diplomeUrl;
+    }
+
+    public void setDiplomeUrl(String diplomeUrl) {
+        this.diplomeUrl = diplomeUrl;
+    }
+
+    public String getLettreMotivationUrl() {
+        return lettreMotivationUrl;
+    }
+
+    public void setLettreMotivationUrl(String lettreMotivationUrl) {
+        this.lettreMotivationUrl = lettreMotivationUrl;
     }
 }

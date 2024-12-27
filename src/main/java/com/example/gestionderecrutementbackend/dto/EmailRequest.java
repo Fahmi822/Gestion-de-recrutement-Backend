@@ -1,4 +1,7 @@
 package com.example.gestionderecrutementbackend.dto;
+
+import java.util.Calendar;
+
 public class EmailRequest {
     private String to;
     private String subject;

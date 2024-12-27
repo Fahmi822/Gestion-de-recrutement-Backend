@@ -22,7 +22,8 @@ public class SignupController {
     @PostMapping("/signup")
     public ResponseEntity<String> signupCandidat(@RequestBody Candidat candidat) {
         // Vérifier si l'email existe déjà
-        Optional<Candidat> existingCandidat = Optional.ofNullable(candidatRepository.findByEmail(candidat.getEmail()));
+        Optional<Candidat> existingCandidat = candidatRepository.findByEmail(candidat.getEmail());
+        //ici
         if (existingCandidat.isPresent()) {
             return ResponseEntity.badRequest().body("Email already in use");
         }
